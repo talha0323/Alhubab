@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alhubab-Urdu Daily</title>
+    <link rel="stylesheet" href="alhubab.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Graduate&display=swap" rel="stylesheet">
+    <link rel="stylesheet" media="screen and (max width:1280px )" href="phone.css">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">  
+    </script> 
+    <!-- <link rel="stylesheet" href="alhubab.js"> -->
+</head>
+
+<body>
+    <!-- <div id="scrollup">
+        <a href=""><img src="scrollup.png" alt=""></a>
+    </div> -->
+
+    <a href="#" class="top"> &#8593;</a>
+    <nav id="navbar">
+        <div id="left">
+            <ul>
+                <li class="date"> <a href="">Thursday, 4 May 2023</a></li>
+                <li class="temp"> <a href="">New Delhi, 25<sup>o</sup>C <img
+                            src="https://www.hindustantimes.com/res/images/weather-icon1.svg" alt=""></a></li>
+                <!-- <img src="weather.webp" alt=""> -->
+            </ul>
+        </div>
+        <div id="logo">
+            <img src="logo.png" alt="">
+            <ul>
+                <li class="name"> <a href="">Alhubab الحباب</a></li>
+            </ul>
+        </div>
+        <!-- <div id="signin">
+            <img src="signin.png" alt="">
+            <ul>
+                <li class="login"> <a href="">Login/Signup</a></li>
+            </ul> 
+        </div> -->
+
+        <div id="signin">
+            <img src="signin.png" alt="">
+            <button>SignIn/Register</button>
+        </div>
+        <div class="overlay">
+        </div>
+        <div class="main-popup">
+            <div class="popup-header">
+                <div id="popup-close-button"><a href="#"></a></div>
+                <ul>
+                    <li><a href="#" id="sign-in">Sign In</a></li>
+                    <li><a href="#" id="register">Register</a></li>
+                </ul>
+            </div><!--.popup-header-->
+            <div class="popup-content">
+                <form action="#" class="sign-in">
+                    <label for="email">Email:</label>
+                    <input type="text" id="email">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password">
+                    <p class="check-mark">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Remember me</label>
+                    </p>
+                    <input type="submit" id="submit" value="Submit">
+                </form>
+
+                <form action="#" class="register">
+                    <label for="email-register">Email:</label>
+                    <input type="text" id="email-register">
+                    <label for="password-register">Password:</label>
+                    <input type="password" id="password-register">
+                    <!-- <label for="password-confirmation">Confirm Password:</label>
+                <input type="password-confirmation" id="password-confirmation"> -->
+                    <p class="check-mark">
+                        <input type="checkbox" id="accept-terms">
+                        <label for="accept-terms">I agree to the <a href="#">Terms</a></label>
+                    </p>
+                    <input type="submit" id="submit" value="Create Account">
+                </form>
+            </div><!--.popup-content-->
+        </div><!--.main-popup-->
+
+        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script>/*Title: Cool Modal Popup Sign In/Out Form*/
+
+            $(function () {
+                //defining all needed variables
+                var $overlay = $('.overlay');
+                var $mainPopUp = $('.main-popup')
+                var $signIn = $('#sign-in');
+                var $register = $('#register');
+                var $formSignIn = $('form.sign-in');
+                var $formRegister = $('form.register');
+
+                var $firstChild = $('nav ul li:first-child');
+                var $secondChild = $('nav ul li:nth-child(2)');
+                var $thirdChild = $('nav ul li:nth-child(3)');
+
+                //defining function to create underline initial state on document load
+                function initialState() {
+                    $('.underline').css({
+                        "width": $firstChild.width(),
+                        "left": $firstChild.position().left,
+                        "top": $firstChild.position().top + $firstChild.outerHeight(true) + 'px'
+                    });
+                }
+                initialState(); //() used after calling function to call function immediately on doc load
+
+                //defining function to change underline depending on which li is active
+                function changeUnderline(el) {
+                    $('.underline').css({
+                        "width": el.width(),
+                        "left": el.position().left,
+                        "top": el.position().top + el.outerHeight(true) + 'px'
+                    });
+                } //note: have not called the function...don't want it called immediately
+
+                $firstChild.on('click', function () {
+                    var el = $firstChild;
+                    changeUnderline(el); //call the changeUnderline function with el as the perameter within the called function
+                    $secondChild.removeClass('active');
+                    $thirdChild.removeClass('active');
+                    $(this).addClass('active');
+                });
+
+                $secondChild.on('click', function () {
+                    var el = $secondChild;
+                    changeUnderline(el); //call the changeUnderline function with el as the perameter within the called function
+                    $firstChild.removeClass('active');
+                    $thirdChild.removeClass('active');
+                    $(this).addClass('active');
+                });
+
+                $thirdChild.on('click', function () {
+                    var el = $thirdChild;
+                    changeUnderline(el); //call the changeUnderline function with el as the perameter within the called function
+                    $firstChild.removeClass('active');
+                    $secondChild.removeClass('active');
+                    $(this).addClass('active');
+                });
+
+
+                $('button').on('click', function () {
+                    $overlay.addClass('visible');
+                    $mainPopUp.addClass('visible');
+                    $signIn.addClass('active');
+                    $register.removeClass('active');
+                    $formRegister.removeClass('move-left');
+                    $formSignIn.removeClass('move-left');
+                });
+
+                $overlay.on('click', function () {
+                    $(this).removeClass('visible');
+                    $mainPopUp.removeClass('visible');
+                });
+                $('#popup-close-button a').on('click', function (e) {
+                    e.preventDefault();
+                    $overlay.removeClass('visible');
+                    $mainPopUp.removeClass('visible');
+                });
+
+                $signIn.on('click', function () {
+                    $signIn.addClass('active');
+                    $register.removeClass('active');
+                    $formSignIn.removeClass('move-left');
+                    $formRegister.removeClass('move-left');
+                });
+
+                $register.on('click', function () {
+                    $signIn.removeClass('active');
+                    $register.addClass('active');
+                    $formSignIn.addClass('move-left');
+                    $formRegister.addClass('move-left');
+                });
+
+                $('input').on('submit', function (e) {
+                    e.preventDefault(); //used to prevent submission of form...remove for real use
+                });
+            });</script>
+    </nav>
+
+    <section id="navbarr">
+        <div class="mid">
+            <ul>
+                <li class="mid"> <a href="#edition" class="hover-underline-animation">Home</a> </li>
+                <li class="mid"> <a href="#container" class="hover-underline-animation">Latest News</a> </li>
+                <li class="mid"> <a href="#event" class="hover-underline-animation">Events</a> </li>
+                <li class="mid"> <a href="#services" class="hover-underline-animation">About</a> </li>
+                <!-- <li class="mid"> <a href="" class="hover-underline-animation">Entertainment</a> </li> -->
+                <li class="mid"> <a href="" class="hover-underline-animation">Editorials</a> </li>
+                <li class="mid"> <a href="" class="hover-underline-animation">Archives</a> </li>
+
+            </ul>
+        </div>
+
+    </section>
+
+    <section id="photo">
+        <div id="pic">
+            <img src="alhubab.jpeg" alt="">
+        </div>
+        <div id="about">
+            <hr>
+            Alhubab is the dream-child of a market visionary Late Mohammad Jamshed Hasan a marketing man with over three
+            decades experience and exposure to vital media functions. He has held senior positions in India’s better
+            known media organizations including The Times of India Group, and has been commended by his peers for his
+            dedication, initiative, applied knowledge and achievements on Public Relations.
+            <hr>
+        </div>
+        <hr>
+    </section>
+    <!-- <hr> -->
+    <div id="edition">
+        Here's our latest edition. You can scroll down to read or download the full newspaper.
+    </div>
+    <section id="paper">
+        <div id="news">
+            <div class="box">
+                <img src="one.jpeg" alt="">
+            </div>
+            <div class="box">
+                <img src="two.jpeg" alt="">
+            </div>
+            <div class="box">
+                <img src="three.jpeg" alt="">
+            </div>
+            <div class="box">
+                <img src="four.jpeg" alt="">
+            </div>
+        </div>
+    </section>
+    <hr>
+    <section id="container">
+        <div id="linee">
+            Latest News
+        </div>
+        <div id="latestnews">
+            <div class="latest">
+                <img src="rahul.webp" alt="">
+                <h3>Sharad Pawar met the Congress leaders at Mallikarjun Kharge's home in Delhi.</h3>
+            </div>
+            <div class="latest">
+                <img src="atiq.jpg" alt="">
+                <h3>Atiq’s world in Prayagraj: Crime, politics and a heap of rubble.</h3>
+            </div>
+            <div class="latest">
+                <img src="stock.jpg" alt="">
+                <h3>Stock Market Holiday Today: BSE, NSE to remain shut for Dr Baba Saheb Ambedkar Jayanti</h3>
+            </div>
+            <div class="latest">
+                <img src="hm.jpg" alt="">
+                <h3>Union Home Minister Amit Shah reviews J&K security, preparations of G20 meeting in Srinagar</h3>
+            </div>
+        </div>
+    </section>
+
+    <hr>
+
+    <!-- <section id="containerr">
+        <div id="cricket">
+            <div id="text">
+                Cricket
+            </div>
+            <div id="over"></div>
+            <div id="over"></div>
+            <div id="over"></div>
+        </div>
+    </section> -->
+
+    <!-- Define the slideshow container -->
+    <section id="event">
+        <div id="write">
+            Some of the events covered by Alhubab.
+        </div>
+        <div id="slideshow">
+            <div class="slide-wrapper">
+
+                <!-- Define each of the slides
+		and write the content -->
+
+                <div class="slide">
+                    <img src="1.jpeg" alt="" class="slide-number">
+                </div>
+                <div class="slide">
+                    <img src="2.jpeg" alt="" class="slide-number">
+                </div>
+                <div class="slide">
+                    <img src="3.jpeg" alt="" class="slide-number">
+                </div>
+                <div class="slide">
+                    <img src="4.jpeg" alt="" class="slide-number">
+                </div>
+            </div>
+        </div>
+       
+    </section>
+    <hr>
+    </section>
+    <section class="posts">
+        <div id="services">
+            <div class="box">
+                <a href="ourmission.html" target="_blank"> <img src="mission.jpg" alt=""> </a>
+                <!-- <img src="mission.jpg" alt=""> -->
+                <a href="ourmission.html" target="_blank">
+                    <h2 class="h-secondary center">Our Mission</h2>
+                </a>
+                <!-- <h2 class="h-secondary center">Our Mission</h2> -->
+                <p>Alhubab is the dream-child of a market visionary Jamshed Hasan a marketing man with over three
+                    decades experience and exposure to vital media functions.</p>
+                <a href="ourmission.html" target="_blank">Read more</a>
+            </div>
+            <div class="box">
+                <a href="aboutus.html" target="_blank"> <img src="aboutus.jpg" alt=""> </a>
+                <!-- <img src="aboutus.jpg" alt=""> -->
+                <a href="aboutus.html" target="_blank">
+                    <h2 class="h-secondary center">About Us</h2>
+                </a>
+                <!-- <h2 class="h-secondary center">About Us</h2> -->
+                <p>Alhubab is the dream-child of a market visionary Jamshed Hasan a marketing man with over three
+                    decades experience and exposure to vital media functions.</p>
+                <a href="aboutus.html" target="_blank">Read more</a>
+            </div>
+            <div class="box">
+                <a href="tariff.html" target="_blank"> <img src="tariff.jpg" alt=""> </a>
+                <!-- <img src="tariff.jpg" alt=""> -->
+                <a href="tariff.html" target="_blank">
+                    <h2 class="h-secondary center">Tariff Details</h2>
+                </a>
+                <!-- <h2 class="h-secondary center">Tariff Details</h2> -->
+                <p>Dear Business Associates: Greetings!!! ALHUBAB is a DAVP approved strong Urdu media vehicle that has
+                    recently knocked the Delhi/NCR market. </p>
+                <a href="tariff.html" target="_blank">Read more</a>
+            </div>
+        </div>
+        <hr>
+    </section>
+    <section id="founder">
+        <div class="line">
+            <li>Thoughts from the founder</li>
+        </div>
+        <div id="thoughts">
+            <img src="founder.png" alt="">
+            <li>Late Jamshed Hasan</li>
+            <p>Founder</p>
+        </div>
+        <div class="para">
+            <p>ALHUBAB is the dream-child of a market visionary Jamshed Hasan a marketing man with over three decades
+                experience and exposure to vital media functions. He has held senior positions in India’s better known
+                media organizations, and has been commended by his peers for his dedication, initiative, applied
+                knowledge and achievements on Public Relations. In the course of his long career, he has come across a
+                wide variety of Senior Executives holding key positions in the industry and commerce, and effectively
+                learned how to cope with their egos.<a href="founder.html"> Read more</a></p>
+        </div>
+    </section>
+    <hr>
+    <section id="footer">
+        <div id="logoo">
+            <img src="logo.png" alt="">
+        </div>
+        <div id="content">
+            <ul>
+                <li class="item"> <a href="">Home</a> </li>
+                <li class="item"> <a href="">About Us</a> </li>
+                <li class="item"> <a href="">Tariff Rates</a> </li>
+                <li class="item"> <a href="">Disclaimer</a> </li>
+                <li class="item"> <a href="">Privacy Policy</a> </li>
+            </ul>
+        </div>
+        <div id="contentt">
+            <ul>
+                <li class="item"> <a href="">Terms of Use</a> </li>
+                <li class="item"> <a href="">Contact Us</a> </li>
+                <li class="item"> <a href="">Weather Today</a> </li>
+                <li class="item"> <a href="">Subscription</a> </li>
+                <li class="item"> <a href="">Newsletters</a> </li>
+            </ul>
+        </div>
+
+        
+        <div id="social">
+            <li>Connect with us</li>
+            <img src="fb.webp" alt="" class="media">
+            <img src="ig.webp" alt="" class="media">
+            <img src="yt.png" alt="" class="media">
+            <img src="whatsapp.webp" alt="" class="media">
+            <img src="twitter.png" alt="" class="media">
+        </div>
+    </section>
+    <section id="copyright">
+        <div class="copy">
+            © 2021 Alhubab.com All rights reserved.
+        </div>
+    </section>
+
+</body>
+
+</html>
